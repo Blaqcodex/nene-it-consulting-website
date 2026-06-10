@@ -1,7 +1,14 @@
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Services from "./components/Services";
+import "./styles/globals.css";
+
 function App() {
   return (
     <>
-      <h1>Nene IT & Consulting</h1>
+      <Navbar />
+      <Hero />
+      <Services />
     </>
   );
 }
