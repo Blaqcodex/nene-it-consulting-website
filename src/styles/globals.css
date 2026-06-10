@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* Brand Design System - Phase 3 */
+:root {
+  --navy: #1E2D78;
+  --purple: #6A0DAD;
+  --violet: #A100FF;
+  --orange: #FF7A1A;
+  --gold: #FFB000;
+  --dark: #050816;
+}
+
+body {
+  margin: 0;
+  background: #050816;
+  color: white;
+  overflow-x: hidden;
+}
