@@ -8,12 +8,26 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <ParticleField />
       <ParticleGalaxy />
-
-      <img src={logo} alt="Nene IT" className="w-40 mx-auto mb-10"/>
       
       <div className="absolute w-[700px] h-[700px] bg-purple-600 rounded-full blur-[180px] opacity-20"/>
 
       <div className="absolute right-0 w-[500px] h-[500px] bg-orange-500 rounded-full blur-[150px] opacity-20"/>
+
+      <motion.img
+            initial={{
+            scale: 0,
+            rotate: -180
+                    }}
+            animate={{
+            scale: 1,
+            rotate: 0
+                    }}
+            transition={{
+            duration: 1.5
+                }}
+            src={logo}
+            alt="logo"
+            className="w-40 mx-auto mb-10"/>  
 
       <motion.div
         initial={{ opacity:0, y:100 }}
