@@ -8,6 +8,7 @@ import Stats from "./components/Stats";
 import SectionDivider from "./components/SectionDivider";
 import { useEffect, useState } from "react";
 import Loader from "./components/Loader";
+import CommandCenter from "./components/CommandCentre";
 import "./styles/globals.css";
 
 function App() {
@@ -40,6 +41,7 @@ if (loading) {
       <SectionDivider />
 
       <Stats />
+      <CommandCenter />
     </>
   );
 }
