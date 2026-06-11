@@ -19,15 +19,12 @@ export default function Services() {
       <div className="grid md:grid-cols-3 gap-8">
         {services.map((service, i) => (
           <motion.div
-            key={service.title}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
-            viewport={{ once: true }}
-            whileHover={{
-              scale: 1.05,
-              rotateX: 5,
-              rotateY: 5,
+            animate={{
+              y: [0, -10, 0],
+            }}
+              transition={{
+              duration: 4,
+              repeat: Infinity,
               borderColor: "#A100FF",
               boxShadow: "0 0 50px rgba(228, 186, 46, 0.3)"
             }}
