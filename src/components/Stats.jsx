@@ -1,3 +1,5 @@
+import CountUp from "react-countup";
+
 export default function Stats() {
   const stats = [
     {

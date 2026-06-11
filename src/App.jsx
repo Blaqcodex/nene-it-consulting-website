@@ -41,7 +41,6 @@ if (loading) {
       <SectionDivider />
 
       <Stats />
-      <CommandCenter />
     </>
   );
 }
