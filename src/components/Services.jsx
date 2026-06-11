@@ -2,20 +2,25 @@ import { motion } from "framer-motion"
 import Tilt from "react-parallax-tilt";
 
 const services = [
-  { title: "Web Development", desc: "Custom apps & platforms built for scale" },
-  { title: "Custom Software", desc: "Bespoke solutions for your exact workflow" },
-  { title: "Cloud Solutions", desc: "AWS, Azure, DevOps & infrastructure" },
-  { title: "AI Automation", desc: "Intelligent workflows that save hours daily" },
-  { title: "IT Consulting", desc: "Strategy, architecture & technical audits" },
-  { title: "Digital Transformation", desc: "Future-proof your business systems" },
+  { title: "Web Development", desc: "Custom apps & platforms built for scale", icon: "🌐" },
+  { title: "Custom Software", desc: "Bespoke solutions for your exact workflow", icon: "💻" },
+  { title: "Cloud Solutions", desc: "AWS, Azure, DevOps & infrastructure", icon: "☁️" },
+  { title: "AI Automation", desc: "Intelligent workflows that save hours daily", icon: "🤖" },
+  { title: "IT Consulting", desc: "Strategy, architecture & technical audits", icon: "📊" },
+  { title: "Digital Transformation", desc: "Future-proof your business systems", icon: "⚙️" },
 ]
 
 export default function Services() {
   return (
     <section id="services" className="py-32 max-w-7xl mx-auto px-8">
-      <h2 className="text-center text-5xl font-bold mb-20">
-        <span className="text-violet">Services</span>
-      </h2>
+      <motion.h2 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-center text-5xl font-bold mb-20 bg-gradient-to-r from-orange-400 via-purple-400 to-pink-500 bg-clip-text text-transparent"
+      >
+        Services
+      </motion.h2>
 
       <div className="grid md:grid-cols-3 gap-8">
         {services.map((service, i) => (
@@ -29,23 +34,24 @@ export default function Services() {
             glareMaxOpacity={0.15}
             glareColor="#A100FF"
             glarePosition="all"
+            className="h-full"
           >
             <motion.div
-              key={service.title}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{
-                borderColor: "#A100FF",
-                boxShadow: "0 0 50px rgba(228, 186, 46, 0.3)"
-              }}
               className="
                 bg-white/5 border-white/10 backdrop-blur-xl 
                 rounded-3xl p-10 group cursor-pointer text-center
-                h-full
+                h-full transition-all duration-500
+                hover:border-violet
+                hover:shadow-[0_0_50px_rgba(161,0,255,0.3)]
               "
             >
+              <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">
+                {service.icon}
+              </div>
               <h3 className="text-2xl font-semibold mb-3 group-hover:text-orange transition-colors">
                 {service.title}
               </h3>
