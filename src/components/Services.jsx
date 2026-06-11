@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import Tilt from "react-parallax-tilt";
 
 const services = [
   { title: "Web Development", desc: "Custom apps & platforms built for scale" },
@@ -18,36 +19,41 @@ export default function Services() {
 
       <div className="grid md:grid-cols-3 gap-8">
         {services.map((service, i) => (
-          <motion.div
-            animate={{
-              y: [0, -10, 0],
-            }}
-              transition={{
-              duration: 4,
-              repeat: Infinity,
-              borderColor: "#A100FF",
-              boxShadow: "0 0 50px rgba(228, 186, 46, 0.3)"
-            }}
-            style={{ perspective: 1000 }}
-            className="
-              bg-white/5
-              border
-              border-white/10
-              backdrop-blur-xl
-              rounded-3xl
-              p-10
-              group
-              cursor-pointer
-              text-center
-            "
+          <Tilt
+            key={service.title}
+            tiltMaxAngleX={15}
+            tiltMaxAngleY={15}
+            scale={1.03}
+            transitionSpeed={1000}
+            glareEnable={true}
+            glareMaxOpacity={0.15}
+            glareColor="#A100FF"
+            glarePosition="all"
           >
-            <h3 className="text-2xl font-semibold mb-3 group-hover:text-orange transition-colors">
-              {service.title}
-            </h3>
-            <p className="text-white/60 group-hover:text-white/80 transition-colors">
-              {service.desc}
-            </p>
-          </motion.div>
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{
+                borderColor: "#A100FF",
+                boxShadow: "0 0 50px rgba(228, 186, 46, 0.3)"
+              }}
+              className="
+                bg-white/5 border-white/10 backdrop-blur-xl 
+                rounded-3xl p-10 group cursor-pointer text-center
+                h-full
+              "
+            >
+              <h3 className="text-2xl font-semibold mb-3 group-hover:text-orange transition-colors">
+                {service.title}
+              </h3>
+              <p className="text-white/60 group-hover:text-white/80 transition-colors">
+                {service.desc}
+              </p>
+            </motion.div>
+          </Tilt>
         ))}
       </div>
     </section>
