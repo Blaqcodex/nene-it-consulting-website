@@ -1,9 +1,14 @@
+import ParticleField from "./ParticleField";
 import { motion } from "framer-motion"
+import logo from "../assets/logo.png";
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <ParticleField />
 
+      <img src={logo} alt="Nene IT" className="w-40 mx-auto mb-10"/>
+      
       <div className="absolute w-[700px] h-[700px] bg-purple-600 rounded-full blur-[180px] opacity-20"/>
 
       <div className="absolute right-0 w-[500px] h-[500px] bg-orange-500 rounded-full blur-[150px] opacity-20"/>

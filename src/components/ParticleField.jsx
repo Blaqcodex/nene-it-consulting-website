@@ -4,23 +4,18 @@ function Particles() {
   return (
     <mesh>
       <sphereGeometry args={[1, 32, 32]} />
-      <meshStandardMaterial wireframe />
+      <meshStandardMaterial wireframe color="#A100FF" />
     </mesh>
   );
 }
 
 export default function ParticleField() {
   return (
-    <div className="absolute inset-0">
-
+    <div className="absolute inset-0 -z-10">
       <Canvas camera={{ position: [0, 0, 5] }}>
-
-        <ambientLight />
-
+        <ambientLight intensity={1.5} />
         <Particles />
-
       </Canvas>
-
     </div>
   );
 }
