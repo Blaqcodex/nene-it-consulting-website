@@ -1,18 +1,73 @@
+import { motion } from "framer-motion"
+
+const aboutCards = [
+  {
+    title: "Mission",
+    desc: "Transform businesses through technology.",
+    gradient: "from-orange-400 to-orange-600"
+  },
+  {
+    title: "Vision", 
+    desc: "Become a trusted digital partner.",
+    gradient: "from-violet-400 to-violet-600"
+  },
+  {
+    title: "Innovation",
+    desc: "Build future-ready solutions.",
+    gradient: "from-pink-400 to-pink-600"
+  },
+]
+
 export default function About() {
   return (
-    <section
-      id="about"
-      className="max-w-6xl mx-auto py-32 px-8"
-    >
-      <h2 className="text-5xl font-bold mb-10">
+    <section id="about" className="max-w-7xl mx-auto py-32 px-8">
+      <motion.h2 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-5xl font-bold mb-12 bg-gradient-to-r from-orange-400 via-purple-400 to-pink-500 bg-clip-text text-transparent"
+      >
         Who We Are
-      </h2>
+      </motion.h2>
 
-      <p className="text-gray-300 text-xl leading-relaxed">
-        Nene IT & Consulting delivers innovative software,
-        cloud, AI and digital transformation solutions that
-        help businesses modernize, automate and scale.
-      </p>
+      <motion.p 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        viewport={{ once: true }}
+        className="text-xl text-white/70 max-w-4xl mb-16 leading-relaxed"
+      >
+        Nene IT & Consulting delivers innovative software, cloud, AI and digital transformation solutions that help businesses modernize, automate and scale.
+      </motion.p>
+
+      <div className="grid md:grid-cols-3 gap-8">
+        {aboutCards.map((card, i) => (
+          <motion.div
+            key={card.title}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.15 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -8, scale: 1.02 }}
+            className="
+              bg-white/5 border-white/10 backdrop-blur-xl
+              rounded-3xl p-8 group
+              hover:border-violet transition-all duration-500
+              text-center cursor-pointer
+            "
+          >
+            <div className={`w-12 h-1 rounded-full bg-gradient-to-r ${card.gradient} mb-6`} />
+            
+            <h3 className="text-2xl font-bold mb-4 group-hover:text-orange transition-colors">
+              {card.title}
+            </h3>
+
+            <p className="text-white/60 group-hover:text-white/80 transition-colors">
+              {card.desc}
+            </p>
+          </motion.div>
+        ))}
+      </div>
     </section>
   );
 }
