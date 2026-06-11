@@ -1,11 +1,13 @@
 import ParticleField from "./ParticleField";
 import { motion } from "framer-motion"
 import logo from "../assets/logo.png";
+import ParticleGalaxy from "./ParticleGalaxy";
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <ParticleField />
+      <ParticleGalaxy />
 
       <img src={logo} alt="Nene IT" className="w-40 mx-auto mb-10"/>
       
