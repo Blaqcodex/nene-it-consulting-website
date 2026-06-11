@@ -4,6 +4,7 @@ import Services from "./components/Services";
 import BackgroundGlow from "./components/BackgroundGlow";
 import About from "./components/About";
 import CursorGlow from "./components/CursorGlow";
+import Stats from "./components/Stats";
 import "./styles/globals.css";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Hero />
       <Services />
       <About />
+      <Stats />
     </>
   );
 }
