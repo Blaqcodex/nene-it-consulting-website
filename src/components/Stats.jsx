@@ -10,17 +10,18 @@ export default function Stats() {
 
   return (
     <section className="py-24">
-      <div className="max-w-7xl mx-auto px-8">
+      {/* Centered container with equal side space */}
+      <div className="max-w-8xl mx-auto px-6">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center text-5xl font-bold mb-16 bg-gradient-to-r from-orange-400 via-purple-400 to-pink-500 bg-clip-text text-transparent"
+          className="text-center text-5xl font-bold mb-20 bg-gradient-to-r from-orange-400 via-purple-400 to-pink-500 bg-clip-text text-transparent"
         >
           Why Choose Us
         </motion.h2>
 
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -33,9 +34,10 @@ export default function Stats() {
                 bg-white/5 backdrop-blur-xl
                 border-white/10
                 rounded-3xl p-8 text-center
-                hover:border-violet
+                hover:border-violet-500
                 transition-all duration-500
                 group
+                h-full
               "
             >
               <h3 className="text-5xl font-black mb-4 bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform">
