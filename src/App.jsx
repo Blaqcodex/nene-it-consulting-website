@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import Loader from "./components/Loader";
 import CommandCenter from "./components/CommandCentre";
 import CallToAction from "./components/CallToAction";
+import Footer from "./components/Footer";
 import "./styles/globals.css";
 
 function App() {
@@ -43,6 +44,7 @@ if (loading) {
 
       <Stats />
       <CallToAction />
+      <Footer />
     </>
   );
 }
