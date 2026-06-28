@@ -2,6 +2,7 @@ import ParticleField from "./ParticleField";
 import { motion } from "framer-motion"
 import logo from "../assets/logo.png";
 import ParticleGalaxy from "./ParticleGalaxy";
+import ENITING from "./ENITING/ENITING";
 
 export default function Hero() {
   return (
@@ -85,6 +86,7 @@ export default function Hero() {
           </motion.button>
         </motion.div>
       </motion.div>
+      <ENITING />
     </section>
   )
 }

@@ -1,4 +1,4 @@
-import heroBotMessages from "../components/HeroBot/HeroBotData";
+import heroBotMessages from "../components/ENITING/HeroBotData";
 
 export async function getHeroBotMessages() {
 
