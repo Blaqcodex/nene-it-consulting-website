@@ -35,7 +35,7 @@ export default function About() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
         viewport={{ once: true }}
-        className="text-center text-xl text-white/70 max-w-4xl mx-auto mb-24 leading-relaxed"
+        className="text-center text-xl text-white/70 max-w-8xl mx-auto mb-24 leading-relaxed"
       >
         Nene IT & Consulting delivers innovative software, cloud, AI and digital transformation solutions that help businesses modernize, automate and scale.
       </motion.p>

@@ -20,7 +20,7 @@ export default function CallToAction() {
           The Future?
         </h2>
 
-        <p className="text-gray-400 text-xl mb-10 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-gray-400 text-xl mb-10 max-w-8xl mx-auto leading-relaxed">
           Let's create software,
           automation and digital experiences
           that move your business forward.

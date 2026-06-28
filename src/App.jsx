@@ -11,6 +11,7 @@ import Loader from "./components/Loader";
 import CommandCenter from "./components/CommandCentre";
 import CallToAction from "./components/CallToAction";
 import Footer from "./components/Footer";
+import CyberGrid from "./components/CyberGrid";
 import "./styles/globals.css";
 
 function App() {
@@ -30,6 +31,7 @@ if (loading) {
 
   return (
     <>
+
       <BackgroundGlow />
       <CursorGlow />
       <Navbar />
