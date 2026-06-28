@@ -1,22 +1,40 @@
 import "./ENITING.css";
 
 import ENITINGCore from "./ENITINGCore";
-import ENITINGRing from "./ENITINGRing";
 import ENITINGEye from "./ENITINGEye";
+import ENITINGRing from "./ENITINGRing";
 import ENITINGParticles from "./ENITINGParticles";
+import ENITINGPanel from "./ENITINGPanel";
+
+import heroBotMessages from "../../data/enitingData";
 
 export default function ENITING() {
+
+  const current = heroBotMessages[0];
+
   return (
-    <div className="eniting">
 
-      <ENITINGParticles />
+    <div className="eniting-wrapper">
 
-      <ENITINGRing />
+      <ENITINGPanel
+        title={current.title}
+        description={current.description}
+      />
 
-      <ENITINGCore />
+      <div className="eniting">
 
-      <ENITINGEye />
+        <ENITINGParticles/>
+
+        <ENITINGRing/>
+
+        <ENITINGCore/>
+
+        <ENITINGEye/>
+
+      </div>
 
     </div>
+
   );
+
 }
