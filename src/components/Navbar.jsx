@@ -5,11 +5,13 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-8 py-5">
 
         <h2 className="font-bold text-2xl text-violet">
-          Nene IT & Consulting
+          
+
         </h2>
 
         <div className="flex gap-8 text-sm uppercase tracking-widest text-white/80">
           <a href="#services" className="hover:text-orange transition-colors">Services</a>
+          <a href="#solutions" className="hover:text-orange transition-colors">Solutions</a>
           <a href="#about" className="hover:text-orange transition-colors">About</a>
           <a href="#contact" className="hover:text-orange transition-colors">Contact</a>
         </div>
