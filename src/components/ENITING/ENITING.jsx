@@ -10,34 +10,56 @@ import ENITINGPanel from "./ENITINGPanel";
 import { getEnitingData } from "../../services/enitingService";
 
 export default function ENITING() {
+
   const [item, setItem] = useState(null);
 
-  useEffect(() => {
-    async function loadData() {
-      const data = await getEnitingData();
-      setItem(data[0]);
-    }
+useEffect(() => {
+  async function loadData() {
+    const data = await getEnitingData();
 
-    loadData();
-  }, []);
+    setItem(data[0]);
 
-  if (!item) return null;
+    let currentIndex = 0;
+
+    setInterval(() => {
+      currentIndex++;
+
+      if (currentIndex >= data.length) {
+        currentIndex = 0;
+      }
+
+      setItem(data[currentIndex]);
+
+    }, 3500);
+  }
+
+  loadData();
+}, []);
+
+  if(!item) return null;
 
   return (
-    <div className="eniting-wrapper">
+
+    <div
+
+      className="eniting-wrapper"
+
+    >
 
       <ENITINGPanel item={item} />
 
       <div className="eniting">
 
-        <ENITINGRing />
+        <ENITINGRing/>
 
-        <ENITINGCore />
+        <ENITINGCore/>
 
-        <ENITINGEye />
+        <ENITINGEye/>
 
       </div>
 
     </div>
+
   );
+
 }

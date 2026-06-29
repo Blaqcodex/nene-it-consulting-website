@@ -58,7 +58,8 @@ export default function Hero() {
           className="relative z-10 -mt-16 md:-mt-24"
         >
           {/* STEP 3: Smaller mobile heading */}
-          <h1
+          <h1 
+            id="engineering"
             className="
               text-5xl
               md:text-8xl
