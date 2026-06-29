@@ -1,118 +1,213 @@
+/* ===========================
+   ENITING Wrapper
+=========================== */
+
+.eniting-wrapper{
+    position:absolute;
+    right:1%;
+    top:30%;
+    transform:translateY(-50%);
+
+    display:flex;
+    align-items:center;
+    gap:30px;
+
+    z-index:100;
+}
+
+/* ===========================
+   Drone
+=========================== */
+
 .eniting{
-position:absolute;
 
-right:12%;
+    width:110px;
+    height:110px;
 
-top:38%;
+    position:relative;
 
-width:120px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-height:120px;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-animation:hovering 4s ease-in-out infinite;
-
-z-index:20;
-}
-
-.eniting-core{
-
-position:absolute;
-
-width:70px;
-
-height:70px;
-
-border-radius:50%;
-
-background:linear-gradient(135deg,#ff8a00,#6b3df5);
-
-box-shadow:
-
-0 0 30px rgba(255,138,0,.5),
-
-0 0 60px rgba(107,61,245,.4);
+    animation:floatDrone 6s ease-in-out infinite;
 
 }
+
+/* ===========================
+   Outer Ring
+=========================== */
 
 .eniting-ring{
 
-position:absolute;
+    position:absolute;
 
-width:110px;
+    width:100%;
+    height:100%;
 
-height:110px;
+    border-radius:50%;
 
-border-radius:50%;
+    border:2px solid rgba(255,255,255,.12);
 
-border:2px solid rgba(255,255,255,.15);
+    animation:rotateRing 20s linear infinite;
 
-animation:spin 8s linear infinite;
+    backdrop-filter:blur(5px);
 
 }
+
+/* ===========================
+   Core
+=========================== */
+
+.eniting-core{
+
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle at top,
+    #ffb347,
+    #ff7b00 45%,
+    #4d32ff);
+
+    box-shadow:
+
+    0 0 20px rgba(255,136,0,.5),
+
+    0 0 60px rgba(88,52,255,.45);
+
+}
+
+/* ===========================
+   Eye
+=========================== */
 
 .eniting-eye{
 
-position:absolute;
+    position:absolute;
 
-width:18px;
+    width:18px;
+    height:18px;
 
-height:18px;
+    border-radius:50%;
 
-border-radius:50%;
+    background:white;
 
-background:white;
+    box-shadow:
 
-box-shadow:
+    0 0 15px white,
 
-0 0 20px white,
+    0 0 40px #ff8a00;
 
-0 0 45px orange;
-
-animation:pulse 2s infinite;
-
-}
-
-.particle{
-
-position:absolute;
-
-border-radius:50%;
-
-background:#ff8a00;
-
-width:var(--size);
-
-height:var(--size);
-
-animation:particleFloat 5s linear infinite;
-
-animation-delay:var(--delay);
+    animation:pulseEye 2s infinite;
 
 }
 
-@keyframes hovering{
+/* ===========================
+   Panel
+=========================== */
 
-0%,100%{
+.eniting-panel{
 
-transform:translateY(0px);
+    width:280px;
+
+    padding:22px;
+
+    border-radius:24px;
+
+    background:
+
+    rgba(20,20,35,.55);
+
+    border:
+
+    1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(25px);
+
+    box-shadow:
+
+    0 0 50px rgba(80,60,255,.18);
 
 }
 
-50%{
+.eniting-panel h3{
 
-transform:translateY(-12px);
+    margin:15px 0;
+
+    font-size:1.3rem;
+
+    color:white;
 
 }
 
+.eniting-panel p{
+
+    color:#cfcfcf;
+
+    line-height:1.7;
+
 }
 
-@keyframes spin{
+/* ===========================
+Status
+=========================== */
+
+.eniting-status{
+
+display:inline-flex;
+
+padding:6px 14px;
+
+border-radius:30px;
+
+font-size:.75rem;
+
+font-weight:700;
+
+letter-spacing:1px;
+
+}
+
+.eniting-status.idle{
+
+background:rgba(120,100,255,.18);
+
+color:#9d8cff;
+
+}
+
+.eniting-status.active{
+
+background:rgba(255,145,0,.18);
+
+color:#ffb347;
+
+}
+
+.eniting-status.thinking{
+
+background:rgba(120,255,220,.15);
+
+color:#8ef0ff;
+
+}
+
+.eniting-status.secure{
+
+background:rgba(0,255,150,.18);
+
+color:#79ffb2;
+
+}
+
+/* ===========================
+Animations
+=========================== */
+
+@keyframes rotateRing{
 
 from{
 
@@ -128,9 +223,31 @@ transform:rotate(360deg);
 
 }
 
-@keyframes pulse{
+@keyframes floatDrone{
 
-0%,100%{
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-12px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes pulseEye{
+
+0%{
 
 transform:scale(1);
 
@@ -142,124 +259,9 @@ transform:scale(1.4);
 
 }
 
-}
-
-/*
-@keyframes particleFloat{
-
-0%{
-
-transform:translate(0,0);
-
-opacity:0;
-
-}
-
-25%{
-
-opacity:1;
-
-}
-
 100%{
 
-transform:translate(
-
-calc((random() - .5) * 80px),
-
--80px
-
-);
-
-opacity:0;
-
-}
-
-}
-
-*/
-
-.eniting-wrapper{
-
-position:absolute;
-
-right:10%;
-
-top:35%;
-
-display:flex;
-
-align-items:center;
-
-gap:25px;
-
-z-index:25;
-
-}
-
-.eniting-panel{
-
-width:250px;
-
-padding:18px;
-
-background:rgba(15,15,25,.65);
-
-backdrop-filter:blur(18px);
-
-border:1px solid rgba(255,255,255,.08);
-
-border-radius:18px;
-
-box-shadow:
-
-0 0 40px rgba(107,61,245,.18);
-
-animation:panelFloat 5s ease-in-out infinite;
-
-}
-
-.eniting-status{
-
-font-size:.75rem;
-
-color:#ff9f1c;
-
-font-weight:700;
-
-letter-spacing:2px;
-
-}
-
-.eniting-panel h3{
-
-margin:12px 0;
-
-font-size:1.2rem;
-
-}
-
-.eniting-panel p{
-
-color:#c8c8c8;
-
-font-size:.92rem;
-
-line-height:1.5;
-
-}
-
-@keyframes panelFloat{
-
-0%,100%{
-
-transform:translateY(0px);
-
-}
-
-50%{
-
-transform:translateY(-6px);
+transform:scale(1);
 
 }
 
