@@ -1,40 +1,43 @@
+import { useEffect, useState } from "react";
+
 import "./ENITING.css";
 
 import ENITINGCore from "./ENITINGCore";
 import ENITINGEye from "./ENITINGEye";
 import ENITINGRing from "./ENITINGRing";
-import ENITINGParticles from "./ENITINGParticles";
 import ENITINGPanel from "./ENITINGPanel";
 
-import heroBotMessages from "../../data/enitingData";
+import { getEnitingData } from "../../services/enitingService";
 
 export default function ENITING() {
+  const [item, setItem] = useState(null);
 
-  const current = heroBotMessages[0];
+  useEffect(() => {
+    async function loadData() {
+      const data = await getEnitingData();
+      setItem(data[0]);
+    }
+
+    loadData();
+  }, []);
+
+  if (!item) return null;
 
   return (
-
     <div className="eniting-wrapper">
 
-      <ENITINGPanel
-        title={current.title}
-        description={current.description}
-      />
+      <ENITINGPanel item={item} />
 
       <div className="eniting">
 
-        <ENITINGParticles/>
+        <ENITINGRing />
 
-        <ENITINGRing/>
+        <ENITINGCore />
 
-        <ENITINGCore/>
-
-        <ENITINGEye/>
+        <ENITINGEye />
 
       </div>
 
     </div>
-
   );
-
 }

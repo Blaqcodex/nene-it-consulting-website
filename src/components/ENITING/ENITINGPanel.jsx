@@ -1,13 +1,15 @@
-export default function ENITINGPanel({ title, description }) {
+import ENITINGStatus from "./ENITINGStatus";
+
+export default function ENITINGPanel({ item }) {
   return (
     <div className="eniting-panel">
-      <span className="eniting-status">
-        ● ONLINE
-      </span>
 
-      <h3>{title}</h3>
+      <ENITINGStatus state={item.state} />
 
-      <p>{description}</p>
+      <h3>{item.title}</h3>
+
+      <p>{item.description}</p>
+
     </div>
   );
 }
