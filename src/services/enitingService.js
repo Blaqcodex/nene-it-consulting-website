@@ -1,5 +1,15 @@
-import enitingData from "../data/enitingData";
+import enitingKnowledge from "../data/enitingKnowledge";
 
 export async function getEnitingData() {
-  return Promise.resolve(enitingData);
+
+  return new Promise((resolve) => {
+
+    setTimeout(() => {
+
+      resolve(enitingKnowledge);
+
+    }, 400);
+
+  });
+
 }
