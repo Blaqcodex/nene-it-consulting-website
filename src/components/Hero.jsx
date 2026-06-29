@@ -3,12 +3,14 @@ import { motion } from "framer-motion"
 import logo from "../assets/logo.png";
 import ParticleGalaxy from "./ParticleGalaxy";
 import ENITING from "./ENITING/ENITING";
+import OrbitalSystem from "./OrbitalSystem";
 
 export default function Hero() {
   return (
     <section className="relative min-h-[110vh] flex items-center justify-center overflow-hidden">
       <ParticleField />
       <ParticleGalaxy />
+      <OrbitalSystem />
 
       <div className="absolute w-[700px] h-[700px] bg-purple-600 rounded-full blur-[180px] opacity-20"/>
       <div className="absolute right-0 w-[500px] h-[500px] bg-orange-500 rounded-full blur-[150px] opacity-20"/>
