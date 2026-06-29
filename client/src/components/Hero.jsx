@@ -11,7 +11,7 @@ export default function Hero() {
 
       <ParticleField />
       <ParticleGalaxy />
-      <OrbitalSystem />
+      {/* <OrbitalSystem /> */}
 
       {/* Background Glow */}
       <div className="absolute w-[700px] h-[700px] bg-purple-600 rounded-full blur-[180px] opacity-20" />
@@ -143,7 +143,7 @@ export default function Hero() {
 
       </motion.div>
 
-      <ENITING />
+      {/* <ENITING /> */}
 
     </section>
   );
