@@ -4,11 +4,47 @@ export default function ENITINGPanel({ item }) {
   return (
     <div className="eniting-panel">
 
-      <ENITINGStatus state={item.status} />
+      <div className="panel-header">
 
-      <h3>{item.title}</h3>
+        <h2>ENITING AI</h2>
 
-      <p>{item.description}</p>
+        <ENITINGStatus status={item.status} />
+
+      </div>
+
+      <div className="panel-section">
+
+        <small>MISSION</small>
+
+        <h3>{item.title}</h3>
+
+        <p>{item.description}</p>
+
+      </div>
+
+      <div className="panel-section">
+
+        <small>TECH STACK</small>
+
+        <ul>
+
+          {item.tech.map((tech) => (
+
+            <li key={tech}>{tech}</li>
+
+          ))}
+
+        </ul>
+
+      </div>
+
+      <div className="panel-section">
+
+        <small>CONFIDENCE</small>
+
+        <strong>{item.confidence}%</strong>
+
+      </div>
 
     </div>
   );

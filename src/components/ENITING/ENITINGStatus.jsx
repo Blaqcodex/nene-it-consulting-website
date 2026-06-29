@@ -1,13 +1,7 @@
-export default function ENITINGStatus({ status }) {
-
+export default function ENITINGStatus({ status = "OFFLINE" }) {
   return (
-
-    <span className={`eniting-status ${status?.toLowerCase()}`}>
-
-      {(status ?? "OFFLINE").toUpperCase()}
-
+    <span className={`eniting-status ${status.toLowerCase()}`}>
+      ● {status}
     </span>
-
   );
-
 }

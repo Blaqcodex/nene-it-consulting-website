@@ -1,64 +1,80 @@
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
-import "./ENITING.css";
-
-import ENITINGCore from "./ENITINGCore";
-import ENITINGEye from "./ENITINGEye";
-import ENITINGRing from "./ENITINGRing";
 import ENITINGPanel from "./ENITINGPanel";
+
+import useHeroWaypoints from "../../hooks/useHeroWaypoints";
+
+import useENITINGMovement from "../../hooks/useENITINGMovement";
 
 import { getEnitingData } from "../../services/enitingService";
 
+import { useEffect, useState } from "react";
+
 export default function ENITING() {
 
-  const [item, setItem] = useState(null);
+  const points = useHeroWaypoints();
 
-useEffect(() => {
-  async function loadData() {
-    const data = await getEnitingData();
+  const destination = useENITINGMovement(points);
 
-    setItem(data[0]);
+  const [data, setData] = useState([]);
 
-    let currentIndex = 0;
+  const [index, setIndex] = useState(0);
 
-    setInterval(() => {
-      currentIndex++;
+  useEffect(() => {
 
-      if (currentIndex >= data.length) {
-        currentIndex = 0;
-      }
+    getEnitingData().then(setData);
 
-      setItem(data[currentIndex]);
+  }, []);
+
+  useEffect(() => {
+
+    if (!data.length) return;
+
+    const timer = setInterval(() => {
+
+      setIndex((i) => (i + 1) % data.length);
 
     }, 3500);
-  }
 
-  loadData();
-}, []);
+    return () => clearInterval(timer);
 
-  if(!item) return null;
+  }, [data]);
+
+  if (!destination || !data.length) return null;
 
   return (
 
-    <div
+    <motion.div
 
       className="eniting-wrapper"
 
-    >
+      animate={{
 
-      <ENITINGPanel item={item} />
+        x: destination.x,
+
+        y: destination.y
+
+      }}
+
+      transition={{
+
+        duration:1.5,
+
+        ease:"easeInOut"
+
+      }}
+
+    >
 
       <div className="eniting">
 
-        <ENITINGRing/>
-
-        <ENITINGCore/>
-
-        <ENITINGEye/>
+        🤖
 
       </div>
 
-    </div>
+      <ENITINGPanel item={data[index]} />
+
+    </motion.div>
 
   );
 
