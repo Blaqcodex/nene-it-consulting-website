@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import servicesRoutes from "./routes/services.routes.js";
 
 const app = express();
 
@@ -15,5 +16,8 @@ app.get("/", (req, res) => {
     version: "1.0.0",
   });
 });
+
+// Services API
+app.use("/api/services", servicesRoutes);
 
 export default app;
