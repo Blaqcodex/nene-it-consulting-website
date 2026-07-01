@@ -29,15 +29,17 @@ export default function ContactModal({ open, onClose }) {
 
     console.log(result);
 
-    if (result.success) {
+if (response.status === 409) {
+  toast.error(result.message);
+  return;
+}
 
-    toast.success(
-        "Project submitted successfully! We'll contact you soon."
-    );
+if (result.success) {
+  toast.success(result.message);
 
-    reset();
+  reset();
 
-    onClose();
+  onClose();
 }
 
   } catch (error) {
