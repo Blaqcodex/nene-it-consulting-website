@@ -212,9 +212,30 @@ export default function ContactModal({ open, onClose }) {
     transition
     hover:scale-[1.02]
     disabled:opacity-60
+    disabled:cursor-not-allowed
+    disabled:hover:scale-100
   "
 >
-  {isSubmitting ? "Submitting..." : "Submit Project"}
+<>
+  {isSubmitting ? (
+    <span className="flex items-center justify-center gap-3">
+      <span
+        className="
+          w-5
+          h-5
+          border-2
+          border-white/30
+          border-t-white
+          rounded-full
+          animate-spin
+        "
+      />
+      Sending...
+    </span>
+  ) : (
+    "Submit Project"
+  )}
+</>
 </button>
 
             </form>
