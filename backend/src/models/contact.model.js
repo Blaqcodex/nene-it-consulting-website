@@ -13,6 +13,8 @@ const contactSchema = new mongoose.Schema(
       required: true,
       lowercase: true,
       trim: true,
+      unique: true,
+      index: true,
     },
 
     company: {
