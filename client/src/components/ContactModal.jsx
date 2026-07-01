@@ -1,6 +1,43 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { contactSchema } from "../validation/contactSchema";
 
 export default function ContactModal({ open, onClose }) {
+    
+    const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+    } = useForm({
+    resolver: zodResolver(contactSchema),
+    });
+
+    const onSubmit = async (data) => {
+  try {
+    const response = await fetch("http://localhost:5000/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    console.log(result);
+
+    if (result.success) {
+      reset();
+      onClose();
+    }
+
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   return (
     <AnimatePresence>
       {open && (
@@ -59,48 +96,120 @@ export default function ContactModal({ open, onClose }) {
               </button>
             </div>
 
-            <div className="space-y-5">
+            <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-5"
+            >
+
+              <div>
+  <input
+    {...register("name")}
+    placeholder="Full Name"
+    className={`
+      w-full
+      rounded-xl
+      bg-white/5
+      p-4
+      outline-none
+      transition
+
+      ${
+        errors.name
+          ? "border border-red-500"
+          : "border border-white/10 focus:border-orange-400"
+      }
+    `}
+  />
+
+  {errors.name && (
+    <p className="text-red-400 text-sm mt-2">
+      {errors.name.message}
+    </p>
+  )}
+</div>
 
               <input
-                placeholder="Full Name"
-                className="w-full rounded-xl bg-white/5 border border-white/10 p-4 outline-none focus:border-orange-400"
-              />
+  {...register("company")}
+  placeholder="Company"
+  className="w-full rounded-xl bg-white/5 border border-white/10 p-4 outline-none focus:border-orange-400"
+/>
 
-              <input
-                placeholder="Company"
-                className="w-full rounded-xl bg-white/5 border border-white/10 p-4 outline-none focus:border-orange-400"
-              />
+              <div>
+  <input
+    {...register("email")}
+    placeholder="Email Address"
+    className={`
+      w-full
+      rounded-xl
+      bg-white/5
+      p-4
+      outline-none
+      transition
 
-              <input
-                placeholder="Email Address"
-                className="w-full rounded-xl bg-white/5 border border-white/10 p-4 outline-none focus:border-orange-400"
-              />
+      ${
+        errors.email
+          ? "border border-red-500"
+          : "border border-white/10 focus:border-orange-400"
+      }
+    `}
+  />
 
-              <textarea
-                rows="6"
-                placeholder="Tell us about your project..."
-                className="w-full rounded-xl bg-white/5 border border-white/10 p-4 outline-none focus:border-orange-400 resize-none"
-              />
+  {errors.email && (
+    <p className="text-red-400 text-sm mt-2">
+      {errors.email.message}
+    </p>
+  )}
+</div>
+
+              <div>
+  <textarea
+    {...register("message")}
+    rows={6}
+    placeholder="Tell us about your project..."
+    className={`
+      w-full
+      rounded-xl
+      bg-white/5
+      p-4
+      outline-none
+      resize-none
+      transition
+
+      ${
+        errors.message
+          ? "border border-red-500"
+          : "border border-white/10 focus:border-orange-400"
+      }
+    `}
+  />
+
+  {errors.message && (
+    <p className="text-red-400 text-sm mt-2">
+      {errors.message.message}
+    </p>
+  )}
+</div>
 
               <button
-                className="
-                  w-full
-                  py-4
-                  rounded-xl
-                  font-semibold
+  type="submit"
+  disabled={isSubmitting}
+  className="
+    w-full
+    py-4
+    rounded-xl
+    font-semibold
+    bg-gradient-to-r
+    from-orange-500
+    to-purple-600
+    transition
+    hover:scale-[1.02]
+    disabled:opacity-60
+  "
+>
+  {isSubmitting ? "Submitting..." : "Submit Project"}
+</button>
 
-                  bg-gradient-to-r
-                  from-orange-500
-                  to-purple-600
-
-                  hover:scale-[1.02]
-                  transition
-                "
-              >
-                Submit Project
-              </button>
-
-            </div>
+            </form>
 
           </motion.div>
         </>
