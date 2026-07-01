@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema } from "../validation/contactSchema";
+import toast from "react-hot-toast";
 
 export default function ContactModal({ open, onClose }) {
     
@@ -29,12 +30,19 @@ export default function ContactModal({ open, onClose }) {
     console.log(result);
 
     if (result.success) {
-      reset();
-      onClose();
-    }
+
+    toast.success(
+        "Project submitted successfully! We'll contact you soon."
+    );
+
+    reset();
+
+    onClose();
+}
 
   } catch (error) {
     console.error(error);
+    toast.error("Failed to submit project. Please try again.");
   }
 };
 
