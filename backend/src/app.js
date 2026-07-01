@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import servicesRoutes from "./routes/services.routes.js";
+import contactRoutes from "./routes/contact.routes.js";
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use("/api/contact", contactRoutes);
 
 // Test Route
 app.get("/", (req, res) => {

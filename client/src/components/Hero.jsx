@@ -1,3 +1,5 @@
+import { useState } from "react";
+import ContactModal from "./ContactModal";
 import ParticleField from "./ParticleField";
 import { motion } from "framer-motion";
 import logo from "../assets/logo.png";
@@ -5,7 +7,9 @@ import ParticleGalaxy from "./ParticleGalaxy";
 import ENITING from "./ENITING/ENITING";
 import OrbitalSystem from "./OrbitalSystem";
 
+
 export default function Hero() {
+  const [openModal, setOpenModal] = useState(false);
   return (
     <section className="relative min-h-[110vh] flex items-center justify-center overflow-hidden">
 
@@ -113,11 +117,12 @@ export default function Hero() {
 
           </h1>
 
-          <p className="mt-8 max-w-3xl mx-auto text-white/70 text-xl">
+          <p className="mt-8 max-w-4xl mx-auto text-white/70 text-xl">
             Software Development • Cloud Solutions • AI Automation • Digital Transformation
           </p>
 
           <motion.button
+            onClick={() => setOpenModal(true)}
             id="cta"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -144,6 +149,11 @@ export default function Hero() {
       </motion.div>
 
       {/* <ENITING /> */}
+
+      <ContactModal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+      />
 
     </section>
   );
