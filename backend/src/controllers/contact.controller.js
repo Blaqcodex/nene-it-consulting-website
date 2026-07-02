@@ -1,5 +1,8 @@
 import Contact from "../models/contact.model.js";
-import { sendAdminNotification } from "../services/email.service.js";
+import {
+  sendAdminNotification,
+  sendClientConfirmation,
+} from "../services/email.service.js";
 
 export const createContact = async (req, res) => {
   try {
@@ -18,9 +21,12 @@ export const createContact = async (req, res) => {
     // Create new enquiry
     const contact = await Contact.create(req.body);
     try {
-    await sendAdminNotification(contact);
+    await Promise.all([
+      sendAdminNotification(contact),
+      sendClientConfirmation(contact),
+    ]);
   } catch (error) {
-    console.error("Email notification failed:", error.message);
+    console.error("Email service failed:", error.message);
   }
 
     res.status(201).json({
