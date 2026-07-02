@@ -1,4 +1,5 @@
 import Contact from "../models/contact.model.js";
+import { sendAdminNotification } from "../services/email.service.js";
 
 export const createContact = async (req, res) => {
   try {
@@ -16,6 +17,7 @@ export const createContact = async (req, res) => {
 
     // Create new enquiry
     const contact = await Contact.create(req.body);
+    await sendAdminNotification(contact);
 
     res.status(201).json({
       success: true,
