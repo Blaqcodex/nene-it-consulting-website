@@ -17,7 +17,11 @@ export const createContact = async (req, res) => {
 
     // Create new enquiry
     const contact = await Contact.create(req.body);
+    try {
     await sendAdminNotification(contact);
+  } catch (error) {
+    console.error("Email notification failed:", error.message);
+  }
 
     res.status(201).json({
       success: true,
