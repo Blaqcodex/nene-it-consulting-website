@@ -12,6 +12,7 @@ import CommandCenter from "./components/CommandCentre";
 import CallToAction from "./components/CallToAction";
 import Footer from "./components/Footer";
 import CyberGrid from "./components/CyberGrid";
+import ClosingVideo from "./components/ClosingVideo";
 import "./styles/globals.css";
 
 function App() {
@@ -46,6 +47,7 @@ if (loading) {
 
       <Stats />
       <CallToAction />
+      <ClosingVideo />
       <Footer />
     </>
   );
