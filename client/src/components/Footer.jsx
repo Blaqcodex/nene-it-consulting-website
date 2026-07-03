@@ -46,7 +46,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 className="font-semibold text-white mb-4">Get in Touch</h4>
-            <p className="text-gray-400 text-sm">info@nenetech.co.za</p>
+            <p className="text-gray-400 text-sm">info@neneit.co.za</p>
             <p className="text-gray-400 text-sm mt-2">+27 82 366 5854</p>
           </div>
         </div>
