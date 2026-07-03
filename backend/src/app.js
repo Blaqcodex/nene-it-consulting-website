@@ -9,7 +9,10 @@ import { apiLimiter } from "./middleware/rateLimit.middleware.js";
 
 const app = express();
 
-// Security
+/* ==========================================
+   Global Middleware
+========================================== */
+
 app.use(helmet());
 
 app.use(
@@ -18,15 +21,11 @@ app.use(
   })
 );
 
-// Body Parser
 app.use(express.json());
 
-// Rate Limiting
-app.use(apiLimiter);
-
-// Routes
-app.use("/api/contact", contactRoutes);
-app.use("/api/services", servicesRoutes);
+/* ==========================================
+   Routes
+========================================== */
 
 // Health Check
 app.get("/", (req, res) => {
@@ -36,5 +35,11 @@ app.get("/", (req, res) => {
     version: "1.0.0",
   });
 });
+
+// Public Routes
+app.use("/api/services", servicesRoutes);
+
+// Protected Against Spam
+app.use("/api/contact", apiLimiter, contactRoutes);
 
 export default app;
