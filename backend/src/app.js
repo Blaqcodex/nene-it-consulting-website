@@ -1,22 +1,34 @@
 import express from "express";
 import cors from "cors";
+import helmet from "helmet";
+
 import servicesRoutes from "./routes/services.routes.js";
 import contactRoutes from "./routes/contact.routes.js";
+
 import { apiLimiter } from "./middleware/rateLimit.middleware.js";
 
 const app = express();
 
-// Middleware
+// Security
+app.use(helmet());
+
 app.use(
   cors({
     origin: "http://localhost:5173",
   })
 );
+
+// Body Parser
 app.use(express.json());
-app.use("/api/contact", contactRoutes);
+
+// Rate Limiting
 app.use(apiLimiter);
 
-// Test Route
+// Routes
+app.use("/api/contact", contactRoutes);
+app.use("/api/services", servicesRoutes);
+
+// Health Check
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
@@ -24,8 +36,5 @@ app.get("/", (req, res) => {
     version: "1.0.0",
   });
 });
-
-// Services API
-app.use("/api/services", servicesRoutes);
 
 export default app;
