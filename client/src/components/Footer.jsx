@@ -211,6 +211,8 @@ export default function Footer() {
               <a href="#" className="hover:text-white/80 transition-colors">Privacy</a>
               <a href="#" className="hover:text-white/80 transition-colors">Terms</a>
               <a href="#" className="hover:text-white/80 transition-colors">Cookies</a>
+              <a href="#" className="hover:text-white/80 transition-colors">Sitemap</a>
+              <a href="#" className="hover:text-white/80 transition-colors">License</a>
             </div>
             <div className="flex items-center gap-3">
               {[].map((s) => (
