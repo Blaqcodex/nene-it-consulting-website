@@ -12,7 +12,7 @@ const seedAdmin = async () => {
     await connectDB();
 
     const existingUser = await User.findOne({
-      email: "nenethabiso082@gmail.com",
+      email: process.env.ADMIN_EMAIL,
     });
 
     if (existingUser) {
@@ -20,11 +20,11 @@ const seedAdmin = async () => {
       process.exit();
     }
 
-    const hashedPassword = await hashPassword("admin@neneit2026Thabiso");
+    const hashedPassword = await hashPassword(process.env.ADMIN_PASSWORD);
 
     await User.create({
-      name: "Thabiso Nene",
-      email: "nenethabiso082@gmail.com",
+      name: process.env.ADMIN_NAME,
+      email: process.env.ADMIN_EMAIL,
       password: hashedPassword,
       role: "admin",
     });
