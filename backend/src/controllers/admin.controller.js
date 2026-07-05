@@ -1,3 +1,4 @@
+import { getContactsSchema } from "../validators/admin.validator.js";
 import Contact from "../models/contact.model.js";
 
 export const getDashboard = async (req, res) => {
@@ -44,11 +45,16 @@ export const getDashboard = async (req, res) => {
 
 export const getContacts = async (req, res) => {
   try {
-    const page = Number(req.query.page) || 1;
-    const limit = Number(req.query.limit) || 10;
-    const search = req.query.search || "";
-    const status = req.query.status || "";
-    const sort = req.query.sort || "desc";
+    const { error, value } = getContactsSchema.validate(req.query);
+
+if (error) {
+  return res.status(400).json({
+    success: false,
+    message: error.details[0].message,
+  });
+}
+
+const { page, limit, search, status, sort } = value;
 
     const filter = {};
 
