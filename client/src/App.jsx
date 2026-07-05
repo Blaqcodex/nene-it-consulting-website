@@ -46,9 +46,16 @@ if (loading) {
       <SectionDivider />
 
       <Stats />
+      <SectionDivider />
+
       <CallToAction />
+      <SectionDivider />
+
       <ClosingVideo />
+      <SectionDivider />
+
       <Footer />
+      <SectionDivider />
     </>
   );
 }
