@@ -1,3 +1,4 @@
+import { fetchContacts } from "../services/admin.service.js";
 import { getContactsSchema } from "../validators/admin.validator.js";
 import Contact from "../models/contact.model.js";
 
@@ -47,72 +48,19 @@ export const getContacts = async (req, res) => {
   try {
     const { error, value } = getContactsSchema.validate(req.query);
 
-if (error) {
-  return res.status(400).json({
-    success: false,
-    message: error.details[0].message,
-  });
-}
+    if (error) {
+      return res.status(400).json({
+        success: false,
+        message: error.details[0].message,
+      });
+    }
 
-const { page, limit, search, status, sort } = value;
-
-    const filter = {};
-
-if (search) {
-  filter.$or = [
-    {
-      name: {
-        $regex: search,
-        $options: "i",
-      },
-    },
-    {
-      email: {
-        $regex: search,
-        $options: "i",
-      },
-    },
-    {
-      company: {
-        $regex: search,
-        $options: "i",
-      },
-    },
-  ];
-}
-
-if (status) {
-  filter.status = status;
-}
-
-    const skip = (page - 1) * limit;
-
-    const totalContacts = await Contact.countDocuments(filter);
-
-    const sortOption =
-  sort === "asc"
-    ? { createdAt: 1 }
-    : { createdAt: -1 };
-
-    const contacts = await Contact.find(filter)
-      .sort(sortOption)
-      .skip(skip)
-      .limit(limit)
-      .select("-__v");
+    const result = await fetchContacts(value);
 
     res.status(200).json({
       success: true,
-
-      pagination: {
-        page,
-        limit,
-        totalContacts,
-        totalPages: Math.ceil(totalContacts / limit),
-      },
-
-      data: contacts,
+      ...result,
     });
-
   } catch (error) {
     res.status(500).json({
       success: false,
