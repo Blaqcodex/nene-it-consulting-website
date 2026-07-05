@@ -4,10 +4,10 @@
   "description": "Nene IT & Consulting Backend API",
   "main": "src/server.js",
   "type": "module",
-"scripts": {
-  "dev": "nodemon src/server.js",
-  "seed:admin": "node src/scripts/seedAdmin.js"
-},
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "seed:admin": "node src/scripts/seedAdmin.js"
+  },
   "keywords": [],
   "author": "Thabiso Nene",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "express-rate-limit": "^8.5.2",
     "helmet": "^8.2.0",
     "joi": "^18.2.3",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.7.3",
     "resend": "^6.16.0"
   },

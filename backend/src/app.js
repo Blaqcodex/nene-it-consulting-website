@@ -4,6 +4,7 @@ import helmet from "helmet";
 
 import servicesRoutes from "./routes/services.routes.js";
 import contactRoutes from "./routes/contact.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 
 import { apiLimiter } from "./middleware/rateLimit.middleware.js";
 
@@ -39,7 +40,11 @@ app.get("/", (req, res) => {
 // Public Routes
 app.use("/api/services", servicesRoutes);
 
+// Auth Routes
+app.use("/api/auth", authRoutes);
+
 // Protected Against Spam
 app.use("/api/contact", apiLimiter, contactRoutes);
+
 
 export default app;
