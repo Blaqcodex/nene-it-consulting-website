@@ -48,11 +48,34 @@ export const getContacts = async (req, res) => {
     const limit = Number(req.query.limit) || 10;
     const search = req.query.search || "";
 
+    const filter = {
+  $or: [
+    {
+      name: {
+        $regex: search,
+        $options: "i",
+      },
+    },
+    {
+      email: {
+        $regex: search,
+        $options: "i",
+      },
+    },
+    {
+      company: {
+        $regex: search,
+        $options: "i",
+      },
+    },
+  ],
+};
+
     const skip = (page - 1) * limit;
 
-    const totalContacts = await Contact.countDocuments();
+    const totalContacts = await Contact.countDocuments(filter);
 
-    const contacts = await Contact.find()
+    const contacts = await Contact.find(filter)
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit)
