@@ -5,6 +5,7 @@ import helmet from "helmet";
 import servicesRoutes from "./routes/services.routes.js";
 import contactRoutes from "./routes/contact.routes.js";
 import authRoutes from "./routes/auth.routes.js";
+import adminRoutes from "./routes/admin.routes.js";
 
 import { apiLimiter } from "./middleware/rateLimit.middleware.js";
 
@@ -46,5 +47,7 @@ app.use("/api/auth", authRoutes);
 // Protected Against Spam
 app.use("/api/contact", apiLimiter, contactRoutes);
 
+// Admin Routes
+app.use("/api/admin", adminRoutes);
 
 export default app;
