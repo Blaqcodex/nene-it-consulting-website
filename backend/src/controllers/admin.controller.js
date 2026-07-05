@@ -48,6 +48,7 @@ export const getContacts = async (req, res) => {
     const limit = Number(req.query.limit) || 10;
     const search = req.query.search || "";
     const status = req.query.status || "";
+    const sort = req.query.sort || "desc";
 
     const filter = {};
 
@@ -82,8 +83,13 @@ if (status) {
 
     const totalContacts = await Contact.countDocuments(filter);
 
+    const sortOption =
+  sort === "asc"
+    ? { createdAt: 1 }
+    : { createdAt: -1 };
+
     const contacts = await Contact.find(filter)
-      .sort({ createdAt: -1 })
+      .sort(sortOption)
       .skip(skip)
       .limit(limit)
       .select("-__v");
