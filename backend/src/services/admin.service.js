@@ -61,3 +61,16 @@ export const fetchContacts = async ({
     data: contacts,
   };
 };
+
+export const updateContactStatus = async (id, status) => {
+  const contact = await Contact.findByIdAndUpdate(
+    id,
+    { status },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  return contact;
+};

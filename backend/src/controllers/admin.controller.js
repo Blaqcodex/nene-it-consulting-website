@@ -1,6 +1,9 @@
 import { fetchContacts } from "../services/admin.service.js";
 import { getContactsSchema } from "../validators/admin.validator.js";
 import Contact from "../models/contact.model.js";
+import {
+  updateContactStatus as updateContactStatusService,
+} from "../services/admin.service.js";
 
 export const getDashboard = async (req, res) => {
   try {
@@ -61,6 +64,36 @@ export const getContacts = async (req, res) => {
       success: true,
       ...result,
     });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export const updateContactStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+
+    const contact = await updateContactStatusService(
+  req.params.id,
+  status
+);
+
+    if (!contact) {
+      return res.status(404).json({
+        success: false,
+        message: "Contact not found.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Status updated successfully.",
+      data: contact,
+    });
+
   } catch (error) {
     res.status(500).json({
       success: false,
