@@ -75,3 +75,8 @@ export const updateContactStatus = async (id, status) => {
   return contact;
 };
 
+export const deleteContact = async (id) => {
+  const contact = await Contact.findByIdAndDelete(id);
+
+  return contact;
+};

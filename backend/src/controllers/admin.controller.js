@@ -2,7 +2,8 @@ import { fetchContacts } from "../services/admin.service.js";
 import { getContactsSchema, updateContactStatusSchema, } from "../validators/admin.validator.js";
 import Contact from "../models/contact.model.js";
 import {
-  updateContactStatus as updateContactStatusService,
+  updateContactStatus as updateContactStatusService, 
+  deleteContact as deleteContactService,
 } from "../services/admin.service.js";
 
 export const getDashboard = async (req, res) => {
@@ -102,6 +103,30 @@ const { status } = value;
       success: true,
       message: "Status updated successfully.",
       data: contact,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export const deleteContact = async (req, res) => {
+  try {
+    const contact = await deleteContactService(req.params.id);
+
+    if (!contact) {
+      return res.status(404).json({
+        success: false,
+        message: "Contact not found.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Contact deleted successfully.",
     });
 
   } catch (error) {
