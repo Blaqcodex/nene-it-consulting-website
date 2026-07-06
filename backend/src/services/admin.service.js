@@ -67,7 +67,7 @@ export const updateContactStatus = async (id, status) => {
     id,
     { status },
     {
-      new: true,
+      returnDocument: "after",
       runValidators: true,
     }
   );
