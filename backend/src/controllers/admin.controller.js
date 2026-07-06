@@ -1,5 +1,5 @@
 import { fetchContacts } from "../services/admin.service.js";
-import { getContactsSchema } from "../validators/admin.validator.js";
+import { getContactsSchema, updateContactStatusSchema, } from "../validators/admin.validator.js";
 import Contact from "../models/contact.model.js";
 import {
   updateContactStatus as updateContactStatusService,
@@ -74,7 +74,17 @@ export const getContacts = async (req, res) => {
 
 export const updateContactStatus = async (req, res) => {
   try {
-    const { status } = req.body;
+    const { error, value } =
+  updateContactStatusSchema.validate(req.body);
+
+if (error) {
+  return res.status(400).json({
+    success: false,
+    message: error.details[0].message,
+  });
+}
+
+const { status } = value;
 
     const contact = await updateContactStatusService(
   req.params.id,

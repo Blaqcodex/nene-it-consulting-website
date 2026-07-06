@@ -24,3 +24,9 @@ export const getContactsSchema = Joi.object({
     .valid("asc", "desc")
     .default("desc"),
 });
+
+export const updateContactStatusSchema = Joi.object({
+  status: Joi.string()
+    .valid("New", "Contacted", "Closed")
+    .required(),
+});

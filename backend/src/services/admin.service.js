@@ -74,3 +74,4 @@ export const updateContactStatus = async (id, status) => {
 
   return contact;
 };
+
