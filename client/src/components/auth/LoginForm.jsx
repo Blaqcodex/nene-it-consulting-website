@@ -1,4 +1,54 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
+import { login as loginApi } from "../../api/auth.api";
+import useAuth from "../../hooks/useAuth";
+
 const LoginForm = () => {
+  const navigate = useNavigate();
+
+const { login } = useAuth();
+
+const [formData, setFormData] = useState({
+  email: "",
+  password: "",
+});
+
+const [loading, setLoading] = useState(false);
+
+const handleChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value,
+  });
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    setLoading(true);
+
+    const response = await loginApi(formData);
+
+    login(response.token);
+
+    toast.success("Mission Control initialized.");
+
+    navigate("/admin/dashboard");
+
+  } catch (error) {
+    toast.error(
+      error.response?.data?.message ||
+      "Authentication failed."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
+
+
   return (
     
     <div className="min-h-screen flex items-center justify-center px-6">
@@ -19,7 +69,10 @@ const LoginForm = () => {
           Authenticate to access the Nene IT & Consulting command centre.
         </p>
 
-        <form className="mt-10 space-y-5">
+        <form
+  onSubmit={handleSubmit}
+  className="mt-10 space-y-5"
+>
 
           <div>
             <label className="block text-gray-300 mb-2">
@@ -27,10 +80,13 @@ const LoginForm = () => {
             </label>
 
             <input
-              type="email"
-              placeholder="admin@neneit.co.za"
-              className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white outline-none focus:border-cyan-400"
-            />
+  type="email"
+  name="email"
+  value={formData.email}
+  onChange={handleChange}
+  placeholder="admin@neneit.co.za"
+  className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white outline-none focus:border-cyan-400"
+/>
           </div>
 
           <div>
@@ -39,17 +95,23 @@ const LoginForm = () => {
             </label>
 
             <input
-              type="password"
-              placeholder="••••••••"
-              className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white outline-none focus:border-cyan-400"
-            />
+  type="password"
+  name="password"
+  value={formData.password}
+  onChange={handleChange}
+  placeholder="••••••••"
+
+  className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white outline-none focus:border-cyan-400"
+/>
           </div>
 
           <button
-            className="w-full rounded-xl bg-cyan-500 hover:bg-cyan-400 transition py-3 font-semibold text-black mt-4"
-          >
-            INITIALIZE
-          </button>
+  type="submit"
+  disabled={loading}
+  className="w-full rounded-xl bg-cyan-500 hover:bg-cyan-400 transition py-3 font-semibold text-black mt-4 disabled:opacity-50"
+>
+  {loading ? "INITIALIZING..." : "INITIALIZE"}
+</button>
 
         </form>
 
