@@ -1,3 +1,5 @@
+import { formatDistanceToNow } from "date-fns";
+
 const RecentSignals = ({ enquiries }) => {
   return (
     <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6">
@@ -14,44 +16,66 @@ const RecentSignals = ({ enquiries }) => {
 
         {enquiries.map((enquiry) => (
 
-          <div
-            key={enquiry._id}
-            className="flex justify-between items-center border-b border-white/10 pb-4"
-          >
+  <div
+    key={enquiry._id}
+    className="
+      flex
+      justify-between
+      items-center
+      rounded-xl
+      border
+      border-white/10
+      bg-black/20
+      px-6
+      py-5
+      transition
+      hover:border-cyan-400/40
+      hover:bg-white/5
+    "
+  >
 
-            <div>
+    <div className="flex items-start gap-4">
 
-              <h3 className="font-semibold">
-                {enquiry.name}
-              </h3>
+      <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse mt-2" />
 
-              <p className="text-sm text-gray-400">
-                {enquiry.email}
-              </p>
+      <div>
 
-            </div>
+        <h3 className="font-semibold text-lg">
+          {enquiry.name}
+        </h3>
 
-            <div className="text-right">
+        <p className="text-gray-400">
+          {enquiry.email}
+        </p>
 
-              <span
-                className="
-                inline-block
-                px-3
-                py-1
-                rounded-full
-                bg-cyan-500/20
-                text-cyan-300
-                text-sm
-                "
-              >
-                {enquiry.status}
-              </span>
+        <p className="text-sm text-gray-500 mt-2">
+          Signal received{" "}
+          {formatDistanceToNow(
+            new Date(enquiry.createdAt),
+            { addSuffix: true }
+          )}
+        </p>
 
-            </div>
+      </div>
 
-          </div>
+    </div>
 
-        ))}
+    <span
+      className="
+        px-3
+        py-1
+        rounded-full
+        bg-cyan-500/20
+        text-cyan-300
+        text-sm
+      "
+    >
+      {enquiry.status}
+    </span>
+
+  </div>
+
+))}
 
       </div>
 
