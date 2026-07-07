@@ -2,6 +2,7 @@ import DashboardLayout from "../../layouts/DashboardLayout";
 import { useEffect, useState } from "react";
 import { getDashboard } from "../../api/dashboard.api";
 import StatCard from "../../components/dashboard/StatCard";
+import RecentSignals from "../../components/dashboard/RecentSignals";
 
 const Dashboard = () => {
   const [dashboard, setDashboard] = useState(null);
@@ -69,6 +70,10 @@ if (loading) {
     value={dashboard.statistics.closed}
     color="red"
   />
+
+  <RecentSignals
+  enquiries={dashboard.recentEnquiries}
+/>
 
 </div>
 
