@@ -1,22 +1,44 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import App from "../Website";
+import Website from "../Website";
 import Login from "../pages/admin/Login";
 import Dashboard from "../pages/admin/Dashboard";
 import Contacts from "../pages/admin/Contacts";
+import ProtectedRoute from "./ProtectedRoute";
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
 
-        <Route path="/" element={<App />} />
+        {/* Public Website */}
+        <Route path="/" element={<Website />} />
 
-        <Route path="/admin/login" element={<Login />} />
+        {/* Admin Login */}
+        <Route
+          path="/admin/login"
+          element={<Login />}
+        />
 
-        <Route path="/admin/dashboard" element={<Dashboard />} />
+        {/* Protected Dashboard */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route path="/admin/contacts" element={<Contacts />} />
+        {/* Protected Contacts */}
+        <Route
+          path="/admin/contacts"
+          element={
+            <ProtectedRoute>
+              <Contacts />
+            </ProtectedRoute>
+          }
+        />
 
       </Routes>
     </BrowserRouter>
