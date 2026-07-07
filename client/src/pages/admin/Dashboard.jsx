@@ -1,6 +1,7 @@
 import DashboardLayout from "../../layouts/DashboardLayout";
 import { useEffect, useState } from "react";
 import { getDashboard } from "../../api/dashboard.api";
+import StatCard from "../../components/dashboard/StatCard";
 
 const Dashboard = () => {
   const [dashboard, setDashboard] = useState(null);
@@ -43,39 +44,31 @@ if (loading) {
   Mission Control is operational.
 </p>
 
-<div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-10">
 
-  <div className="rounded-2xl border border-white/10 p-6 bg-white/5">
-    <p className="text-gray-400">Total Enquiries</p>
+  <StatCard
+    title="Total Enquiries"
+    value={dashboard.statistics.totalEnquiries}
+    color="cyan"
+  />
 
-    <h2 className="text-4xl font-bold mt-2">
-      {dashboard.statistics.totalEnquiries}
-    </h2>
-  </div>
+  <StatCard
+    title="New"
+    value={dashboard.statistics.newEnquiries}
+    color="green"
+  />
 
-  <div className="rounded-2xl border border-white/10 p-6 bg-white/5">
-    <p className="text-gray-400">New</p>
+  <StatCard
+    title="Contacted"
+    value={dashboard.statistics.contacted}
+    color="yellow"
+  />
 
-    <h2 className="text-4xl font-bold mt-2">
-      {dashboard.statistics.newEnquiries}
-    </h2>
-  </div>
-
-  <div className="rounded-2xl border border-white/10 p-6 bg-white/5">
-    <p className="text-gray-400">Contacted</p>
-
-    <h2 className="text-4xl font-bold mt-2">
-      {dashboard.statistics.contacted}
-    </h2>
-  </div>
-
-  <div className="rounded-2xl border border-white/10 p-6 bg-white/5">
-    <p className="text-gray-400">Closed</p>
-
-    <h2 className="text-4xl font-bold mt-2">
-      {dashboard.statistics.closed}
-    </h2>
-  </div>
+  <StatCard
+    title="Closed"
+    value={dashboard.statistics.closed}
+    color="red"
+  />
 
 </div>
 
