@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Toaster } from "react-hot-toast";
-import App from "./App";
+import App from "./Website";
 import AuthProvider from "./context/AuthContext";
+import AppRoutes from "./routes/AppRoutes";
 import "./index.css";
 
 import Lenis from "lenis";
@@ -32,7 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     />
 
     <AuthProvider>
-      <App />
+      <AppRoutes />
     </AuthProvider>
 
   </React.StrictMode>
