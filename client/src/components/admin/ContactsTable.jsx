@@ -1,4 +1,5 @@
 import StatusBadge from "./StatusBadge";
+import ActionButtons from "./ActionButtons";
 
 const ContactsTable = ({ contacts }) => {
   return (
@@ -84,7 +85,7 @@ const ContactsTable = ({ contacts }) => {
 
                 <td className="px-6 py-4 text-center">
 
-                  Coming Soon
+                  <ActionButtons contact={contact} />
 
                 </td>
 
