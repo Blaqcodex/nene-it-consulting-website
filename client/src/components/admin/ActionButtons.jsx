@@ -1,4 +1,4 @@
-const ActionButtons = ({ contact, onView }) => {
+const ActionButtons = ({ contact, onView, onStatus }) => {
   return (
     <div className="flex items-center justify-center gap-2">
       <button
@@ -10,11 +10,12 @@ const ActionButtons = ({ contact, onView }) => {
 </button>
 
       <button
-        className="px-3 py-1 rounded-lg bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/30 transition"
-        title="Update Status"
-      >
-        ✏️
-      </button>
+  onClick={() => onStatus(contact)}
+  className="px-3 py-1 rounded-lg bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/30 transition"
+  title="Update Status"
+>
+  ✏️
+</button>
 
       <button
         className="px-3 py-1 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30 transition"

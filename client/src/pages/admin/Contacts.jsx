@@ -4,9 +4,13 @@ import ContactsTable from "../../components/admin/ContactsTable";
 import SearchBar from "../../components/admin/SearchBar";
 import { getContacts } from "../../services/admin.service";
 import ViewContactModal from "../../components/admin/ViewContactModal";
+import UpdateStatusModal from "../../components/admin/UpdateStatusModal";
+import { updateContactStatus } from "../../services/admin.service";
+
 
 const Contacts = () => {
   const [selectedContact, setSelectedContact] = useState(null);
+  const [statusContact, setStatusContact] = useState(null);
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
@@ -18,6 +22,18 @@ const Contacts = () => {
     const response = await getContacts();
 
     setContacts(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const handleStatusUpdate = async (status) => {
+  try {
+    await updateContactStatus(statusContact._id, status);
+
+    setStatusContact(null);
+
+    fetchContacts();
   } catch (error) {
     console.error(error);
   }
@@ -51,6 +67,7 @@ const Contacts = () => {
           <ContactsTable
   contacts={contacts}
   onView={setSelectedContact}
+  onStatus={setStatusContact}
 />
         </div>
 
@@ -60,6 +77,13 @@ const Contacts = () => {
   contact={selectedContact}
   onClose={() => setSelectedContact(null)}
 />
+
+<UpdateStatusModal
+  contact={statusContact}
+  onClose={() => setStatusContact(null)}
+  onSave={handleStatusUpdate}
+/>
+
     </DashboardLayout>
   );
 };

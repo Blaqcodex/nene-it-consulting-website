@@ -1,7 +1,7 @@
 import StatusBadge from "./StatusBadge";
 import ActionButtons from "./ActionButtons";
 
-const ContactsTable = ({ contacts, onView }) => {
+const ContactsTable = ({ contacts, onView, onStatus }) => {
   return (
     <div className="bg-[#111827] rounded-xl border border-gray-800 overflow-hidden">
 
@@ -88,6 +88,7 @@ const ContactsTable = ({ contacts, onView }) => {
                   <ActionButtons
   contact={contact}
   onView={onView}
+  onStatus={onStatus}
 />
 
                 </td>
