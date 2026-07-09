@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import ContactsTable from "../../components/admin/ContactsTable";
 import SearchBar from "../../components/admin/SearchBar";
+import { getContacts } from "../../services/admin.service";
 
 const Contacts = () => {
   const [contacts, setContacts] = useState([]);
@@ -11,13 +12,14 @@ const Contacts = () => {
   }, []);
 
   const fetchContacts = async () => {
-    try {
-      // API call will go here
-      console.log("Fetching contacts...");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  try {
+    const response = await getContacts();
+
+    setContacts(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   return (
     <DashboardLayout>
