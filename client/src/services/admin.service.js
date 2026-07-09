@@ -5,3 +5,17 @@ export const getContacts = async () => {
 
   return response.data;
 };
+
+export const updateContactStatus = async (id, status) => {
+  const response = await api.patch(`/admin/contacts/${id}`, {
+    status,
+  });
+
+  return response.data;
+};
+
+export const deleteContact = async (id) => {
+  const response = await api.delete(`/admin/contacts/${id}`);
+
+  return response.data;
+};
