@@ -3,8 +3,10 @@ import DashboardLayout from "../../layouts/DashboardLayout";
 import ContactsTable from "../../components/admin/ContactsTable";
 import SearchBar from "../../components/admin/SearchBar";
 import { getContacts } from "../../services/admin.service";
+import ViewContactModal from "../../components/admin/ViewContactModal";
 
 const Contacts = () => {
+  const [selectedContact, setSelectedContact] = useState(null);
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
@@ -46,10 +48,18 @@ const Contacts = () => {
         <SearchBar />
 
         <div className="mt-6">
-          <ContactsTable contacts={contacts} />
+          <ContactsTable
+  contacts={contacts}
+  onView={setSelectedContact}
+/>
         </div>
 
       </div>
+      
+      <ViewContactModal
+  contact={selectedContact}
+  onClose={() => setSelectedContact(null)}
+/>
     </DashboardLayout>
   );
 };
