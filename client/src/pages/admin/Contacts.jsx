@@ -6,11 +6,14 @@ import { getContacts } from "../../services/admin.service";
 import ViewContactModal from "../../components/admin/ViewContactModal";
 import UpdateStatusModal from "../../components/admin/UpdateStatusModal";
 import { updateContactStatus } from "../../services/admin.service";
+import DeleteContactModal from "../../components/admin/DeleteContactModal";
+import { deleteContact } from "../../services/admin.service";
 
 
 const Contacts = () => {
   const [selectedContact, setSelectedContact] = useState(null);
   const [statusContact, setStatusContact] = useState(null);
+  const [deleteTarget, setDeleteTarget] = useState(null);
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
@@ -32,6 +35,18 @@ const handleStatusUpdate = async (status) => {
     await updateContactStatus(statusContact._id, status);
 
     setStatusContact(null);
+
+    fetchContacts();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const handleDelete = async (id) => {
+  try {
+    await deleteContact(id);
+
+    setDeleteTarget(null);
 
     fetchContacts();
   } catch (error) {
@@ -68,6 +83,7 @@ const handleStatusUpdate = async (status) => {
   contacts={contacts}
   onView={setSelectedContact}
   onStatus={setStatusContact}
+  onDelete={setDeleteTarget}
 />
         </div>
 
@@ -82,6 +98,12 @@ const handleStatusUpdate = async (status) => {
   contact={statusContact}
   onClose={() => setStatusContact(null)}
   onSave={handleStatusUpdate}
+/>
+
+<DeleteContactModal
+  contact={deleteTarget}
+  onClose={() => setDeleteTarget(null)}
+  onDelete={handleDelete}
 />
 
     </DashboardLayout>
