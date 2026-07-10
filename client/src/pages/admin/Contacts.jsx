@@ -10,6 +10,7 @@ import DeleteContactModal from "../../components/admin/DeleteContactModal";
 import { deleteContact } from "../../services/admin.service";
 import useContactSearch from "../../hooks/useContactSearch";
 import StatusFilter from "../../components/admin/StatusFilter";
+import LoadingState from "../../components/admin/LoadingState";
 
 
 const Contacts = () => {
@@ -19,6 +20,7 @@ const Contacts = () => {
   const [contacts, setContacts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
+  const [loading, setLoading] = useState(true);
 
 const filteredContacts = useContactSearch(
   contacts,
@@ -32,11 +34,15 @@ const filteredContacts = useContactSearch(
 
   const fetchContacts = async () => {
   try {
+    setLoading(true);
+
     const response = await getContacts();
 
     setContacts(response.data);
   } catch (error) {
     console.error(error);
+  } finally {
+    setLoading(false);
   }
 };
 
@@ -99,12 +105,18 @@ const handleDelete = async (id) => {
 </div>
 
         <div className="mt-6">
-          <ContactsTable
-  contacts={filteredContacts}
-  onView={setSelectedContact}
-  onStatus={setStatusContact}
-  onDelete={setDeleteTarget}
-/>
+          {
+  loading ? (
+    <LoadingState />
+  ) : (
+    <ContactsTable
+      contacts={filteredContacts}
+      onView={setSelectedContact}
+      onStatus={setStatusContact}
+      onDelete={setDeleteTarget}
+    />
+  )
+}
         </div>
 
       </div>
