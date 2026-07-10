@@ -9,6 +9,7 @@ import { updateContactStatus } from "../../services/admin.service";
 import DeleteContactModal from "../../components/admin/DeleteContactModal";
 import { deleteContact } from "../../services/admin.service";
 import useContactSearch from "../../hooks/useContactSearch";
+import StatusFilter from "../../components/admin/StatusFilter";
 
 
 const Contacts = () => {
@@ -17,10 +18,12 @@ const Contacts = () => {
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [contacts, setContacts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
 
 const filteredContacts = useContactSearch(
   contacts,
-  searchTerm
+  searchTerm,
+  statusFilter
 );
 
   useEffect(() => {
@@ -83,10 +86,17 @@ const handleDelete = async (id) => {
 
         </div>
 
-        <SearchBar
-  value={searchTerm}
-  onChange={(e) => setSearchTerm(e.target.value)}
-/>
+        <div className="flex gap-4 items-center mt-6">
+  <SearchBar
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+  />
+
+  <StatusFilter
+    value={statusFilter}
+    onChange={(e) => setStatusFilter(e.target.value)}
+  />
+</div>
 
         <div className="mt-6">
           <ContactsTable
