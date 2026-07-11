@@ -11,6 +11,7 @@ import { deleteContact } from "../../services/admin.service";
 import useContactSearch from "../../hooks/useContactSearch";
 import StatusFilter from "../../components/admin/StatusFilter";
 import LoadingState from "../../components/admin/LoadingState";
+import EmptyState from "../../components/admin/EmptyState";
 
 
 const Contacts = () => {
@@ -108,6 +109,11 @@ const handleDelete = async (id) => {
           {
   loading ? (
     <LoadingState />
+  ) : filteredContacts.length === 0 ? (
+    <EmptyState
+      title="No Contacts Found"
+      message="Try changing your search or filter."
+    />
   ) : (
     <ContactsTable
       contacts={filteredContacts}
