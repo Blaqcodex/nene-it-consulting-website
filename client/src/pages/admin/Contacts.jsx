@@ -12,6 +12,7 @@ import useContactSearch from "../../hooks/useContactSearch";
 import StatusFilter from "../../components/admin/StatusFilter";
 import LoadingState from "../../components/admin/LoadingState";
 import EmptyState from "../../components/admin/EmptyState";
+import { toast } from "react-toastify";
 
 
 const Contacts = () => {
@@ -54,8 +55,10 @@ const handleStatusUpdate = async (status) => {
     setStatusContact(null);
 
     fetchContacts();
+    toast.success("Contact status updated successfully!");
   } catch (error) {
     console.error(error);
+    toast.error("Failed to update contact status.");
   }
 };
 
@@ -64,10 +67,12 @@ const handleDelete = async (id) => {
     await deleteContact(id);
 
     setDeleteTarget(null);
-
+    
     fetchContacts();
+    toast.success("Contact deleted successfully!");
   } catch (error) {
     console.error(error);
+    toast.error("Failed to delete contact.");
   }
 };
 
