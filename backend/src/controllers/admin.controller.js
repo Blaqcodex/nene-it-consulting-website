@@ -22,6 +22,40 @@ export const getDashboard = async (req, res) => {
       status: "Closed",
     });
 
+    const now = new Date();
+
+const startOfToday = new Date(
+  now.getFullYear(),
+  now.getMonth(),
+  now.getDate()
+);
+
+const startOfWeek = new Date(startOfToday);
+startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+
+const startOfMonth = new Date(
+  now.getFullYear(),
+  now.getMonth(),
+  1
+);
+
+const today = await Contact.countDocuments({
+  createdAt: { $gte: startOfToday },
+});
+
+const thisWeek = await Contact.countDocuments({
+  createdAt: { $gte: startOfWeek },
+});
+
+const thisMonth = await Contact.countDocuments({
+  createdAt: { $gte: startOfMonth },
+});
+
+const conversionRate =
+  totalEnquiries === 0
+    ? 0
+    : Math.round((closed / totalEnquiries) * 100);
+
     const recentEnquiries = await Contact.find()
       .sort({ createdAt: -1 })
       .limit(5)
@@ -36,6 +70,13 @@ export const getDashboard = async (req, res) => {
         contacted,
         closed,
       },
+
+      analytics: {
+  today,
+  thisWeek,
+  thisMonth,
+  conversionRate,
+},
 
       recentEnquiries,
     });
