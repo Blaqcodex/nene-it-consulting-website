@@ -4,6 +4,7 @@ import { getDashboard } from "../../api/dashboard.api";
 import StatCard from "../../components/dashboard/StatCard";
 import RecentSignals from "../../components/dashboard/RecentSignals";
 import MissionAnalytics from "../../components/dashboard/MissionAnalytics";
+import EnquiriesChart from "../../components/dashboard/EnquiriesChart";
 
 const Dashboard = () => {
   const [dashboard, setDashboard] = useState(null);
@@ -87,6 +88,8 @@ if (loading) {
     <MissionAnalytics
       analytics={dashboard.analytics}
     />
+
+    <EnquiriesChart />
 
     <RecentSignals
       enquiries={dashboard.recentEnquiries}
